@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+  <url>
+    <loc>http://fuxu0625.com/2016/08/31/danli/</loc>
+    <lastmod>2016-09-01T06:02:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java单例的正确姿势</title>
+        <pubTime>2016-08-31T07:01:45.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+         
+           
+             
+              <breadCrumb title="coding" url="http://fuxu0625.com/categories/coding/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://fuxu0625.com/2016/08/29/aaaa/</loc>
+    <lastmod>2016-08-30T09:15:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2016-08-29T14:38:25.000Z</pubTime>
+        
+        <tag>其他</tag>
+         
+         
+           
+             
+              <breadCrumb title="other" url="http://fuxu0625.com/categories/other/"/>
+          
+        </display>
+    </data>
+    </url>
+
+</urlset>
