@@ -4,20 +4,28 @@
   
     
     <entry>
-      <title><![CDATA[JVM---GC]]></title>
-      <url>http://fuxu0625.com/2017/03/07/jvm-gc/</url>
-      <content type="html"><![CDATA[<p>关于JVM是每个Java程序员必须了解的，接下来我会持续学习并总结：</p>
-<h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><hr>
-<p><img src="http://ocpue1vvp.bkt.clouddn.com/gc.png" alt=""></p>
-]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[分布式---数据库扩展]]></title>
       <url>http://fuxu0625.com/2017/03/06/fenbushi/</url>
       <content type="html"><![CDATA[<p>总结：</p>
 <h3 id="数据库扩展"><a href="#数据库扩展" class="headerlink" title="数据库扩展"></a>数据库扩展</h3><hr>
 <p><img src="http://ocpue1vvp.bkt.clouddn.com/ada.png" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[JVM---类加载机制]]></title>
+      <url>http://fuxu0625.com/2017/01/08/jvm-classloader/</url>
+      <content type="html"><![CDATA[<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><hr>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/classloader.png" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[JVM---GC]]></title>
+      <url>http://fuxu0625.com/2016/12/07/jvm-gc/</url>
+      <content type="html"><![CDATA[<p>关于JVM是每个Java程序员必须了解的，接下来我会持续学习并总结：</p>
+<h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><hr>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/gc.png" alt=""></p>
 ]]></content>
     </entry>
     
