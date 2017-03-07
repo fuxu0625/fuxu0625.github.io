@@ -4,6 +4,15 @@
   
     
     <entry>
+      <title><![CDATA[JVM---GC]]></title>
+      <url>http://fuxu0625.com/2017/03/07/jvm-gc/</url>
+      <content type="html"><![CDATA[<p>关于JVM是每个Java程序员必须了解的，接下来我会持续学习并总结：</p>
+<h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><hr>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/gc.png" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[分布式---数据库扩展]]></title>
       <url>http://fuxu0625.com/2017/03/06/fenbushi/</url>
       <content type="html"><![CDATA[<p>总结：</p>
