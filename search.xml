@@ -6,7 +6,8 @@
     <entry>
       <title><![CDATA[分布式---数据库扩展]]></title>
       <url>http://fuxu0625.com/2017/03/06/fenbushi/</url>
-      <content type="html"><![CDATA[<p>总结：</p>
+      <content type="html"><![CDATA[<a id="more"></a>
+<p>总结：</p>
 <h3 id="数据库扩展"><a href="#数据库扩展" class="headerlink" title="数据库扩展"></a>数据库扩展</h3><hr>
 <p><img src="http://ocpue1vvp.bkt.clouddn.com/ada.png" alt=""></p>
 ]]></content>
@@ -15,7 +16,8 @@
     <entry>
       <title><![CDATA[JVM---类加载]]></title>
       <url>http://fuxu0625.com/2017/01/08/jvm-classloader/</url>
-      <content type="html"><![CDATA[<h2 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载 "></a>类的加载 <a id="more"></a></h2><p>  .class文件读入到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的java类。</p>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h2 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h2><p>  .class文件读入到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的java类。</p>
 <h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><p><img src="http://ocpue1vvp.bkt.clouddn.com/shunxu.png" alt=""><br>   除解析过程外，其他阶段顺序固定。解析阶段在某些情况下可以在初始化之后再开始，这是为了运行时动态绑定特性（JIT例如接口只在调用的时候才知道具体实现的是哪个子类）</p>
 <hr>
 <p><strong>加载</strong>:加载类的二进制数据</p>
