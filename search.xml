@@ -4,6 +4,16 @@
   
     
     <entry>
+      <title><![CDATA[Java基础与干货---"".equal与equal("")]]></title>
+      <url>http://fuxu0625.com/2017/05/12/equalsTest/</url>
+      <content type="html"><![CDATA[<a id="more"></a>
+<h3 id="quot-quot-equal与equal-quot-quot-的区别？"><a href="#quot-quot-equal与equal-quot-quot-的区别？" class="headerlink" title="&quot;&quot;.equal与equal(&quot;&quot;)的区别？"></a><code>&quot;&quot;.equal</code>与<code>equal(&quot;&quot;)</code>的区别？</h3><p>   通常情况下两者相同，但是在与null对比时候不同,如下：</p>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/equalss.jpeg" alt=""></p>
+<p>   所以推荐使用<code>&quot;&quot;.equals()</code>可以避免空指针异常</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[分布式---数据库扩展]]></title>
       <url>http://fuxu0625.com/2017/03/06/fenbushi/</url>
       <content type="html"><![CDATA[<a id="more"></a>
