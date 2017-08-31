@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[Api文档自动生成的调研]]></title>
-      <url>http://fuxu0625.com/2017/05/17/api/</url>
+      <url>http://snellfu.com/2017/05/17/api/</url>
       <content type="html"><![CDATA[<a id="more"></a>
 <h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的差不多再以word接口文档的方式交付给前端，存在问题：</p>
 <blockquote>
@@ -54,7 +54,7 @@
     
     <entry>
       <title><![CDATA[Java基础与干货---"".equal与equal("")]]></title>
-      <url>http://fuxu0625.com/2017/05/12/equalsTest/</url>
+      <url>http://snellfu.com/2017/05/12/equalsTest/</url>
       <content type="html"><![CDATA[<a id="more"></a>
 <h3 id="quot-quot-equal与equal-quot-quot-的区别？"><a href="#quot-quot-equal与equal-quot-quot-的区别？" class="headerlink" title="&quot;&quot;.equal与equal(&quot;&quot;)的区别？"></a><code>&quot;&quot;.equal</code>与<code>equal(&quot;&quot;)</code>的区别？</h3><p>   通常情况下两者相同，但是在与null对比时候不同,如下：</p>
 <p><img src="http://ocpue1vvp.bkt.clouddn.com/equalss.jpeg" alt=""></p>
@@ -64,7 +64,7 @@
     
     <entry>
       <title><![CDATA[分布式---数据库扩展]]></title>
-      <url>http://fuxu0625.com/2017/03/06/fenbushi/</url>
+      <url>http://snellfu.com/2017/03/06/fenbushi/</url>
       <content type="html"><![CDATA[<a id="more"></a>
 <p>总结：</p>
 <h3 id="数据库扩展"><a href="#数据库扩展" class="headerlink" title="数据库扩展"></a>数据库扩展</h3><hr>
@@ -74,7 +74,7 @@
     
     <entry>
       <title><![CDATA[JVM---类加载]]></title>
-      <url>http://fuxu0625.com/2017/01/08/jvm-classloader/</url>
+      <url>http://snellfu.com/2017/01/08/jvm-classloader/</url>
       <content type="html"><![CDATA[<a id="more"></a>
 <h2 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h2><p>  .class文件读入到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的java类。</p>
 <h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><p><img src="http://ocpue1vvp.bkt.clouddn.com/shunxu.png" alt=""><br>   除解析过程外，其他阶段顺序固定。解析阶段在某些情况下可以在初始化之后再开始，这是为了运行时动态绑定特性（JIT例如接口只在调用的时候才知道具体实现的是哪个子类）</p>
@@ -145,7 +145,7 @@
     
     <entry>
       <title><![CDATA[JVM---GC]]></title>
-      <url>http://fuxu0625.com/2016/12/07/jvm-gc/</url>
+      <url>http://snellfu.com/2016/12/07/jvm-gc/</url>
       <content type="html"><![CDATA[<p>关于JVM是每个Java程序员必须了解的，接下来我会持续学习并总结：</p>
 <h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><hr>
 <p><img src="http://ocpue1vvp.bkt.clouddn.com/gc.png" alt=""></p>
@@ -154,7 +154,7 @@
     
     <entry>
       <title><![CDATA[Java基础与干货---集合]]></title>
-      <url>http://fuxu0625.com/2016/09/06/jihe/</url>
+      <url>http://snellfu.com/2016/09/06/jihe/</url>
       <content type="html"><![CDATA[<p>总结了一下关于Java集合的知识点，干货如下：</p>
 <h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><hr>
 <p><img src="http://ocpue1vvp.bkt.clouddn.com/%E9%9B%86%E5%90%88.png" alt=""></p>
@@ -168,7 +168,7 @@
     
     <entry>
       <title><![CDATA[Java基础与干货---单例]]></title>
-      <url>http://fuxu0625.com/2016/08/31/danli/</url>
+      <url>http://snellfu.com/2016/08/31/danli/</url>
       <content type="html"><![CDATA[<p>单例能做那些事:</p>
 <ul>
 <li>延迟加载</li>
@@ -215,7 +215,7 @@
     
     <entry>
       <title><![CDATA[搭建Blog的初衷]]></title>
-      <url>http://fuxu0625.com/2016/08/29/aaaa/</url>
+      <url>http://snellfu.com/2016/08/29/aaaa/</url>
       <content type="html"><![CDATA[<p>   拖延症晚期的我，今天起有了自己的Blog！说到为什么要搭自己的博客，这可要好好说道说道。<a id="more"></a><br> 其实很久之前，大概15年还没毕业的时候就有搭建自己blog的想法，一来可以总结一些知识点，二来可以当做自己的一张”名片”，再不济可以拿来跟小伙伴显摆显摆（哈哈~~原谅我的肤浅）。</p>
 <p> 有了这么好的想法，只可惜自己比较懒还伴有拖延症，直到最近，我遇到了一些问题。众所周知作为程序员平时都会总结一些知识点，我也会总结一些，一般会放在印象笔记，有道云笔记上，大概像这样：<br><img src="http://ocpue1vvp.bkt.clouddn.com/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0.png" alt=""></p>
 <p>还有这样：<br><img src="http://ocpue1vvp.bkt.clouddn.com/%E6%9C%89%E9%81%93%E4%BA%91%E7%AC%94%E8%AE%B0.png" alt=""></p>
