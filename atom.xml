@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>SnellFu&#39;s Blog</title>
+  <subtitle>Just be yourself</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://snellfu.com/"/>
+  <updated>2017-09-01T03:16:17.000Z</updated>
+  <id>http://snellfu.com/</id>
+  
+  <author>
+    <name>SnellFu</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Api文档自动生成的调研</title>
+    <link href="http://snellfu.com/2017/05/17/api/"/>
+    <id>http://snellfu.com/2017/05/17/api/</id>
+    <published>2017-05-17T02:52:19.000Z</published>
+    <updated>2017-09-01T03:16:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的差不多再以word接口文档的方式交付给前端，存在问题：</p>
+<blockquote>
+<ul>
+<li>接口改动时，不易被识别</li>
+<li>维护困难，不便于查找</li>
+<li>不能进行测试</li>
+<li>单独维护接口文档</li>
+<li>文档更新不及时，更新不方便</li>
+<li>前端需要依赖接口数据进行开发</li>
+<li>代码和文档分离，不好维护</li>
+</ul>
+</blockquote>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>   前后端分离已经是业界所共识的一种开发/部署模式了，<br>   后端负责数据的提供和计算，前端负责数据的展现和交互逻辑，<br>   前后端通过RESTFul的接口来通信，解耦前后端的开发过程，细化职责，提高了开发效率。<br>   但是前后端集成的效率成为一个绕不开的问题，由于前后端并行开发，在集成联调时需要花费大量的精力和时间来调试。<br>   并且随着项目的发展，异构网络及微服务的引入，后端会越来越复杂，一个Ａｐｉ接口可能需要若干个成员的共同维护，在这样复杂的系统中，后台任意端点的失败都可能影响前端集成开发的流程。<br>   一般会采用mock的方式来解决这个问题,所谓mock服务，就是对某些不容易构造或者不容易获取的对象，创建一个虚拟的对象以便测试开发。<br>   <img src="http://ocpue1vvp.bkt.clouddn.com/Mock.jpeg" alt="image"><br>   Mock服务解决了前端依赖接口数据进行开发的问题，进一步解耦前后端，做到了接口设计先行，定下接口契约后各端并行开发。<br>   并将这些契约作为可以被测试的中间格式。然后前后端都需要有测试来使用这些契约。一旦契约发生变化，则另一方的测试会失败，这样就会驱动双方协商，并提高集成时的效率。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>  API文档管理+API测试+Mock+用的爽！</p>
+<h2 id="选型"><a href="#选型" class="headerlink" title="选型"></a>选型</h2><p>  有了以上目标，接下来的就是进行工具选型。</p>
+<ul>
+<li>RAP</li>
+</ul>
+<p>RAP是一个可视化接口管理工具 通过分析接口结构，动态生成模拟数据，校验真实接口正确性， 围绕接口定义，通过一系列自动化工具提升我们的协作效率。</p>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/RAP.png" alt="image"></p>
+<ul>
+<li>ApiDoc</li>
+</ul>
+<p>apidoc 是一个简单的API 文档生成工具，它从代码注释中提取特定格式的内容，生成文档。相对而言，web接口的注释维护起来更加方便，不需要额外再维护一份文档。</p>
+<p>apidoc 拥有以下特点：</p>
+<ol>
+<li>跨平台，linux、windows、macOS 等都支持；</li>
+<li>支持语言广泛，即使是不支持，也很方便扩展；</li>
+<li>支持多个不同语言的多个项目生成一份文档；</li>
+<li>输出模板可自定义；</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">	* @api &#123;post&#125; /admin/admin/adminGet 工作人员详情</div><div class="line">	* @apiDescription 获取工作人员详情</div><div class="line">	* @apiName adminGet</div><div class="line">	* @apiGroup admin</div><div class="line">	* @apiVersion 1.0.0</div><div class="line">	* </div><div class="line">	* @apiParam &#123;Number&#125; adminId 工作人员ID</div><div class="line">	* @apiParamExample &#123;json&#125; Request Example</div><div class="line"> 	&#123;</div><div class="line">    &quot;requestHeader&quot;: &#123;</div><div class="line">        &quot;apiName&quot;: &quot;adminGet&quot;,</div><div class="line">        &quot;version&quot;: &quot;v1.0.0&quot;,</div><div class="line">        &quot;source&quot;: &quot;saas&quot;,</div><div class="line">        &quot;token&quot;: &quot;gym_login_token_dd36cd89-e27d-4a01-bdf2-eb712c395436&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;requestBody&quot;: &#123;</div><div class="line">        &quot;adminId&quot;: &quot;ACFJNOJIV&quot;</div><div class="line">     &#125;</div><div class="line">  &#125;</div><div class="line">	*</div><div class="line">	* </div><div class="line">	* @apiSuccess &#123;Number&#125; code 响应码.</div><div class="line">	* @apiSuccess &#123;String&#125; msg 提示</div><div class="line">	* @apiSuccess &#123;Number&#125; subCode 提示码.</div><div class="line">	* @apiSuccess &#123;String&#125; subMsg 提示信息</div><div class="line">	* @apiSuccess &#123;Json&#125; response 结果</div><div class="line">	* @apiSuccess (response) &#123;Json&#125; admin 人员信息</div><div class="line">	* @apiSuccess (response) &#123;Json&#125; roleList 角色列表</div><div class="line">	* </div><div class="line">	* @apiSuccess (admin) &#123;String&#125; adminId 工作人员ID</div><div class="line">	* @apiSuccess (admin) &#123;String&#125; name 名字</div><div class="line">	* @apiSuccess (admin) &#123;String&#125; phone 电话</div><div class="line">	* @apiSuccess (admin) &#123;String&#125; level 级别 0超管 1普通</div><div class="line">	* @apiSuccess (admin) &#123;String&#125; avatar 头像</div><div class="line">	* @apiSuccess (admin) &#123;Number&#125; sex 性别</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; idCard 身份证</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; jobNumber 工号</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; birthday 出生日期</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; remark 备注</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; joinTime  加入时间</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; description 个人简介</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; specialty 特长</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; height 身高</div><div class="line">    * @apiSuccess (admin) &#123;Double&#125; weight 体重</div><div class="line">    * @apiSuccess (admin) &#123;Double&#125; workYear 工作年限</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; certificate 资质</div><div class="line">    * @apiSuccess (admin) &#123;String&#125; motto 格言</div><div class="line">    * @apiSuccess (admin)  &#123;JSONArray&#125; coachPicList 教练图片</div><div class="line">    * </div><div class="line">	*</div><div class="line">	* @apiSuccessExample &#123;json&#125; 返回样例:</div><div class="line">	*</div><div class="line">	*                    &#123;</div><div class="line">    &quot;code&quot;: 0,</div><div class="line">    &quot;msg&quot;: &quot;success&quot;,</div><div class="line">    &quot;subCode&quot;: &quot;&quot;,</div><div class="line">    &quot;subMsg&quot;: &quot;&quot;,</div><div class="line">    &quot;response&quot;: &#123;</div><div class="line">        &quot;admin&quot;: &#123;</div><div class="line">            &quot;adminId&quot;: &quot;ACFJNOJIV&quot;,</div><div class="line">            &quot;avatar&quot;: &quot;&quot;,</div><div class="line">            &quot;idCard&quot;: &quot;123sedfe&quot;,</div><div class="line">            &quot;jobNumber&quot;: &quot;ssd1&quot;,</div><div class="line">            &quot;joinTime&quot;: &quot;2017-03-26&quot;,</div><div class="line">            &quot;level&quot;: 1,</div><div class="line">            &quot;name&quot;: &quot;张教练&quot;,</div><div class="line">            &quot;phone&quot;: &quot;18009090909&quot;,</div><div class="line">            &quot;remark&quot;: &quot;这是员工&quot;,</div><div class="line">            &quot;sex&quot;: 1,</div><div class="line">            &quot;height&quot;: 185,</div><div class="line">            &quot;weight&quot;: 140.5,</div><div class="line">            &quot;workYear&quot;: 10,</div><div class="line">            &quot;certificate&quot;: &quot;资质&quot;,</div><div class="line">            &quot;specialty&quot;: &quot;擅长&quot;,</div><div class="line">            &quot;description&quot;: &quot;个人简介&quot;,</div><div class="line">            &quot;birthday&quot;: &quot;2010-01-01&quot;,</div><div class="line">            &quot;motto&quot;: &quot;人生格言&quot;,</div><div class="line">            &quot;coachPicList&quot;: [</div><div class="line">                &#123;</div><div class="line">                    &quot;id&quot;: &quot;ASDCDEDE6&quot;,</div><div class="line">                    &quot;url&quot;: &quot;&quot;</div><div class="line">                &#125;</div><div class="line">            ]</div><div class="line">        &#125;,</div><div class="line">        &quot;roleList&quot;: [</div><div class="line">            &quot;ABOMNB0B3&quot;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">	*/</div></pre></td></tr></table></figure>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/apidoc1.png" alt="image"></p>
+<p>缺点：<br>   提供的测试功能过于简单<br>   key value形式的参数</p>
+<ul>
+<li>Swagger</li>
+</ul>
+<blockquote>
+<p>Swagger UI+Swagger Editor+Swagger API Spec</p>
+<p>Swagger UI+Swagger API Spec+SpringMVC</p>
+</blockquote>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/swagger.png" alt="image"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;现状&quot;&gt;&lt;a href=&quot;#现状&quot; class=&quot;headerlink&quot; title=&quot;现状&quot;&gt;&lt;/a&gt;现状&lt;/h2&gt;&lt;p&gt;  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的
+    
+    </summary>
+    
+      <category term="util" scheme="http://snellfu.com/categories/util/"/>
+    
+    
+      <category term="工具" scheme="http://snellfu.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java基础与干货---&quot;&quot;.equal与equal(&quot;&quot;)</title>
+    <link href="http://snellfu.com/2017/05/12/equalsTest/"/>
+    <id>http://snellfu.com/2017/05/12/equalsTest/</id>
+    <published>2017-05-12T08:19:25.000Z</published>
+    <updated>2017-05-17T02:58:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h3 id="quot-quot-equal与equal-quot-quot-的区别？"><a href="#quot-quot-equal与equal-quot-quot-的区别？" class="headerlink" title="&quot;&quot;.equal与equal(&quot;&quot;)的区别？"></a><code>&quot;&quot;.equal</code>与<code>equal(&quot;&quot;)</code>的区别？</h3><p>   通常情况下两者相同，但是在与null对比时候不同,如下：</p>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/equalss.jpeg" alt=""></p>
+<p>   所以推荐使用<code>&quot;&quot;.equals()</code>可以避免空指针异常</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h3 id=&quot;quot-quot-equal与equal-quot-quot-的区别？&quot;&gt;&lt;a href=&quot;#quot-quot-equal与equal-quot-quot-的区别？&quot; class=&quot;headerlink&quot; title=&quot;&amp;q
+    
+    </summary>
+    
+      <category term="base" scheme="http://snellfu.com/categories/base/"/>
+    
+    
+      <category term="Java" scheme="http://snellfu.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分布式---数据库扩展</title>
+    <link href="http://snellfu.com/2017/03/06/fenbushi/"/>
+    <id>http://snellfu.com/2017/03/06/fenbushi/</id>
+    <published>2017-03-06T10:26:50.000Z</published>
+    <updated>2017-03-08T04:39:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<p>总结：</p>
+<h3 id="数据库扩展"><a href="#数据库扩展" class="headerlink" title="数据库扩展"></a>数据库扩展</h3><hr>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/ada.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;总结：&lt;/p&gt;
+&lt;h3 id=&quot;数据库扩展&quot;&gt;&lt;a href=&quot;#数据库扩展&quot; class=&quot;headerlink&quot; title=&quot;数据库扩展&quot;&gt;&lt;/a&gt;数据库扩展&lt;/h3&gt;&lt;hr&gt;
+&lt;p&gt;&lt;img src=&quot;http://ocpue1v
+    
+    </summary>
+    
+      <category term="framework" scheme="http://snellfu.com/categories/framework/"/>
+    
+    
+      <category term="架构" scheme="http://snellfu.com/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM---类加载</title>
+    <link href="http://snellfu.com/2017/01/08/jvm-classloader/"/>
+    <id>http://snellfu.com/2017/01/08/jvm-classloader/</id>
+    <published>2017-01-08T04:30:32.000Z</published>
+    <updated>2017-03-08T04:38:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<h2 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h2><p>  .class文件读入到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的java类。</p>
+<h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><p><img src="http://ocpue1vvp.bkt.clouddn.com/shunxu.png" alt=""><br>   除解析过程外，其他阶段顺序固定。解析阶段在某些情况下可以在初始化之后再开始，这是为了运行时动态绑定特性（JIT例如接口只在调用的时候才知道具体实现的是哪个子类）</p>
+<hr>
+<p><strong>加载</strong>:加载类的二进制数据</p>
+<p>  通常也被称作“装载”，主要完成：</p>
+<ul>
+<li>通过“类全名”来获取定义此类的二进制字节流</li>
+<li>将字节流所代表的静态存储结构转换为方法区的运行时数据结构</li>
+<li>在java堆中生成一个代表这个类的java.lang.Class对象，作为方法区这些数据的访问入口<br>相对于类加载的其他阶段而言，加载阶段（准确地说，是加载阶段获取类的二进制字节流的动作）是可控性最强的阶段，因为开发人员既可以使用系统提供的类加载器来完成加载，也可以自定义自己的类加载器来完成加载。</li>
+</ul>
+<hr>
+<p><strong>验证</strong>:确保被加载的类的正确性</p>
+<p>确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。主要验证：</p>
+<ul>
+<li>文件格式验证：<br> 验证字节流是否符合Class文件格式的规范；例如：是否以0xCAFEBABE开头、主次版本号是否在当前虚拟机的处理范围之内、常量池中的常量是否有不被支持的类型。</li>
+<li>元数据验证：<br>对字节码描述的信息进行语义分析（注意：对比javac编译阶段的语义分析），以保证其描述的信息符合Java语言规范的要求；例如：这个类是否有父类，除了java.lang.Object之外</li>
+<li>字节码验证<br> 通过数据流和控制流分析，确定程序语义是合法的、符合逻辑的</li>
+<li>符号引用验证<br> 确保解析动作能正确执行</li>
+</ul>
+<hr>
+<p><strong>准备</strong>:为类的静态变量分配内存，并将其初始化为默认值</p>
+<p> 为类变量分配内存并设置类变量初始值的阶段，这些内存都将在方法区中分配</p>
+<ul>
+<li>内存分配的仅包括类变量（static），而不包括实例变量，实例变量会在对象实例化时随着对象一块分配在Java堆中。</li>
+<li><p>初始值通常情况下是数据类型默认的零值（如0、0L、null、false等），而不是被在Java代码中被显式地赋予的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public static int value = 3；</div></pre></td></tr></table></figure>
+<p>变量value在准备阶段过后的初始值为0，而不是3，因为这时候尚未开始执行任何Java方法，而把value赋值为3的putstatic指令是在程序编译后，存放于类构造器方法之中的，所以把value赋值为3的动作将在初始化阶段才会执行。</p>
+<p>这里还需要注意如下几点：</p>
+<p>1、对基本数据类型来说，对于类变量（static）和全局变量，如果不显式地对其赋值而直接使用，则系统会为其赋予默认的零值，而对于局部变量来说，在使用前必须显式地为其赋值，否则编译时不通过。<br>2、对于同时被static和final修饰的常量，必须在声明的时候就为其显式地赋值，否则编译时不通过；而只被final修饰的常量则既可以在声明时显式地为其赋值，也可以在类初始化时显式地为其赋值，总之，在使用前必须为其显式地赋值，系统不会为其赋予默认零值。<br>3、对于引用数据类型reference来说，如数组引用、对象引用等，如果没有对其进行显式地赋值而直接使用，系统都会为其赋予默认的零值，即null。<br>4、如果在数组初始化时没有对数组中的各元素赋值，那么其中的元素将根据对应的数据类型而被赋予默认的零值<br>5、如果类字段的字段属性表中存在ConstantValue属性，即同时被final和static修饰，那么在准备阶段变量value就会被初始化为ConstValue属性所指定的值。<br>假设上面的类变量value被定义为： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public static final int value = 3；</div></pre></td></tr></table></figure>
+<p>编译时Javac将会为value生成ConstantValue属性，在准备阶段虚拟机就会根据ConstantValue的设置将value赋值为3。我们可以理解为static final常量在编译期就将其结果放入了调用它的类的常量池中</p>
+</li>
+</ul>
+<hr>
+<p><strong>解析</strong>:把类中的符号引用转换为直接引用</p>
+<p>  解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程，解析动作主要针对类或接口、字段、类方法、接口<br>  方法、方法类型、方法句柄和调用点限定符7类符号引用进行。符号引用就是一组符号来描述目标，可以是任<br>  何字面量。</p>
+<hr>
+<p> <strong>初始化</strong></p>
+<p>为类的静态变量赋予正确的初始值，JVM负责对类进行初始化，主要对类变量进行初始化。在Java中对类变量进行初始值设定有两种方式：</p>
+<ul>
+<li>声明类变量是指定初始值</li>
+<li>使用静态代码块为类变量指定初始值</li>
+</ul>
+<p>JVM初始化步骤</p>
+<pre><code>1、假如这个类还没有被加载和连接，则程序先加载并连接该类
+2、假如该类的直接父类还没有被初始化，则先初始化其直接父类
+3、假如类中有初始化语句，则系统依次执行这些初始化语句
+类初始化时机：只有当对类的主动使用的时候才会导致类的初始化，类的主动使用包括以下六种：
+- 创建类的实例，也就是new的方式
+- 访问某个类或接口的静态变量，或者对该静态变量赋值
+- 调用类的静态方法
+- 反射（如Class.forName(“com.shengsiyuan.Test”)）
+- 初始化某个类的子类，则其父类也会被初始化
+- Java虚拟机启动时被标明为启动类的类（Java Test），直接使用java.exe命令来运行某个主类
+结束生命周期
+在如下几种情况下，Java虚拟机将结束生命周期
+- 执行了System.exit()方法
+- 程序正常执行结束
+- 程序在执行过程中遇到了异常或错误而异常终止
+- 由于操作系统出现错误而导致Java虚拟机进程终止
+</code></pre><hr>
+<h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p><img src="http://ocpue1vvp.bkt.clouddn.com/classloader.png" alt=""></p>
+<h2 id="类加载方式"><a href="#类加载方式" class="headerlink" title="类加载方式"></a>类加载方式</h2><p>  有三种方式：<br> 1、命令行启动应用时候由JVM初始化加载<br> 2、通过Class.forName()方法动态加载<br> 3、通过ClassLoader.loadClass()方法动态加载<br><em>注：<br> <em>*Class.forName()和ClassLoader.loadClass()区别:</em></em><br>Class.forName()：将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块；<br>ClassLoader.loadClass():只干一件事情，就是将.class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块。<br>Class.forName(name, initialize, loader)带参函数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象 。</p>
+<hr>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;类的加载&quot;&gt;&lt;a href=&quot;#类的加载&quot; class=&quot;headerlink&quot; title=&quot;类的加载&quot;&gt;&lt;/a&gt;类的加载&lt;/h2&gt;&lt;p&gt;  .class文件读入到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟
+    
+    </summary>
+    
+      <category term="base" scheme="http://snellfu.com/categories/base/"/>
+    
+    
+      <category term="Java" scheme="http://snellfu.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM---GC</title>
+    <link href="http://snellfu.com/2016/12/07/jvm-gc/"/>
+    <id>http://snellfu.com/2016/12/07/jvm-gc/</id>
+    <published>2016-12-07T04:16:39.000Z</published>
+    <updated>2017-03-07T04:33:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>关于JVM是每个Java程序员必须了解的，接下来我会持续学习并总结：</p>
+<h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><hr>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/gc.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;关于JVM是每个Java程序员必须了解的，接下来我会持续学习并总结：&lt;/p&gt;
+&lt;h3 id=&quot;GC&quot;&gt;&lt;a href=&quot;#GC&quot; class=&quot;headerlink&quot; title=&quot;GC&quot;&gt;&lt;/a&gt;GC&lt;/h3&gt;&lt;hr&gt;
+&lt;p&gt;&lt;img src=&quot;http://ocpue1
+    
+    </summary>
+    
+      <category term="base" scheme="http://snellfu.com/categories/base/"/>
+    
+    
+      <category term="Java" scheme="http://snellfu.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java基础与干货---集合</title>
+    <link href="http://snellfu.com/2016/09/06/jihe/"/>
+    <id>http://snellfu.com/2016/09/06/jihe/</id>
+    <published>2016-09-06T12:38:31.000Z</published>
+    <updated>2016-09-06T12:52:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>总结了一下关于Java集合的知识点，干货如下：</p>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><hr>
+<p><img src="http://ocpue1vvp.bkt.clouddn.com/%E9%9B%86%E5%90%88.png" alt=""></p>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><p><img src="http://ocpue1vvp.bkt.clouddn.com/list.png" alt=""></p>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p><img src="http://ocpue1vvp.bkt.clouddn.com/Map.png" alt=""></p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p><img src="http://ocpue1vvp.bkt.clouddn.com/set.png" alt=""></p>
+<p><a href="http://naotu.baidu.com/file/87803853799c5ff751b3ae2d8ce0018f?token=6508b9b59c568995" target="_blank" rel="external">查看完整</a></p>
+<p><a href="http://www.cnblogs.com/skywang12345/p/3323085.html" target="_blank" rel="external">参考文档1(强烈推荐)</a><br><a href="http://www.jianshu.com/p/c5f85e9c0098" target="_blank" rel="external">参考文档2</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;总结了一下关于Java集合的知识点，干货如下：&lt;/p&gt;
+&lt;h3 id=&quot;集合&quot;&gt;&lt;a href=&quot;#集合&quot; class=&quot;headerlink&quot; title=&quot;集合&quot;&gt;&lt;/a&gt;集合&lt;/h3&gt;&lt;hr&gt;
+&lt;p&gt;&lt;img src=&quot;http://ocpue1vvp.bkt.clo
+    
+    </summary>
+    
+      <category term="coding" scheme="http://snellfu.com/categories/coding/"/>
+    
+    
+      <category term="Java" scheme="http://snellfu.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java基础与干货---单例</title>
+    <link href="http://snellfu.com/2016/08/31/danli/"/>
+    <id>http://snellfu.com/2016/08/31/danli/</id>
+    <published>2016-08-31T07:01:45.000Z</published>
+    <updated>2016-09-02T03:39:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>单例能做那些事:</p>
+<ul>
+<li>延迟加载</li>
+<li>线程安全</li>
+<li>没有性能问题</li>
+<li>防止序列化产生新对象</li>
+<li>防止反射攻击</li>
+</ul>
+<h3 id="最简单的单例—饿汉式"><a href="#最简单的单例—饿汉式" class="headerlink" title="最简单的单例—饿汉式"></a>最简单的单例—<strong>饿汉式</strong></h3><hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class Singleton &#123;</div><div class="line">    private static final Singleton INSTANCE = new Singleton();</div><div class="line">    // 私有化构造函数</div><div class="line">    private Singleton()&#123;&#125;</div><div class="line"></div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        return INSTANCE;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种单例的写法最简单，但是缺点是一旦类被加载，单例就会初始化，没有实现懒加载。而且当实现了Serializable接口后，反序列化时单例会被破坏。</p>
+<p>实现Serializable接口需要重写 <strong>readResolve</strong>，才能保证其反序列化依旧是单例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class Singleton implements Serializable &#123;</div><div class="line">    private static final Singleton INSTANCE = new Singleton();</div><div class="line">    // 私有化构造函数</div><div class="line">    private Singleton()&#123;&#125;</div><div class="line"></div><div class="line">    public static Singleton getInstance()&#123;</div><div class="line">        return INSTANCE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 如果实现了Serializable, 必须重写这个方法</div><div class="line">     */</div><div class="line">    private Object readResolve() throws ObjectStreamException &#123;</div><div class="line">        return INSTANCE;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="最体现技术的单例—懒汉式"><a href="#最体现技术的单例—懒汉式" class="headerlink" title="最体现技术的单例—懒汉式"></a>最体现技术的单例—<strong>懒汉式</strong></h3><hr>
+<p>懒汉式即实现延迟加载的单例，为上述饿汉式的优化形式。而因其仍需要进一步优化，往往成为面试考点。</p>
+<p>懒汉式的最初形式是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class Singleton &#123;</div><div class="line">    private static Singleton INSTANCE;</div><div class="line">    private Singleton ()&#123;&#125;</div><div class="line"></div><div class="line">    public static Singleton getInstance() &#123;</div><div class="line">     if (INSTANCE == null) &#123;</div><div class="line">         INSTANCE = new Singleton();</div><div class="line">     &#125;</div><div class="line">     return INSTANCE;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这种写法就轻松实现了单例的懒加载，只有调用了<strong>getInstance</strong>方法才会初始化。但是这样的写法出现了新的问题–线程不安全。当多个线程调用<strong>getInstance</strong>方法时，可能会创建多个实例，因此需要对其进行同步。</p>
+<p>如何使其线程安全呢？简单，加个<strong>synchronized</strong>关键字就行了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public static synchronized Singleton getInstance() &#123;</div><div class="line">    if (INSTANCE == null) &#123;</div><div class="line">        INSTANCE = new Singleton();</div><div class="line">    &#125;</div><div class="line">    return INSTANCE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可是…这样又出现了性能问题，简单粗暴的同步整个方法，导致同一时间内只有一个线程能够调用<strong>getInstance</strong>方法。</p>
+<p>因为仅仅需要对初始化部分的代码进行同步，所以再次进行优化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public static Singleton getSingleton() &#123;</div><div class="line">    if (INSTANCE == null) &#123;               // 第一次检查</div><div class="line">        synchronized (Singleton.class) &#123;</div><div class="line">            if (INSTANCE == null) &#123;      // 第二次检查</div><div class="line">                INSTANCE = new Singleton();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return INSTANCE ;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  执行两次检测很有必要：当多线程调用时，如果多个线程同时执行完了第一次检查，其中一个进入同步代码块创建了实例，后面的线程因第二次检测不会创建新实例。</p>
+<p>这段代码看起来很完美，但仍旧存在问题，以下内容引用自黑桃夹克大神的如何正确地写出单例模式</p>
+<p>  这段代码看起来很完美，很可惜，它是有问题。主要在于<strong>instance = new Singleton()</strong>这句，这并非是一个原子操作，事实上在 JVM 中这句话大概做了下面 3 件事情。</p>
+<ul>
+<li>给 <strong>instance</strong> 分配内存</li>
+<li>调用 <strong>Singleton</strong> 的构造函数来初始化成员变量</li>
+<li>将<strong>instance</strong>对象指向分配的内存空间（执行完这步 <strong>instance</strong> 就为非 null 了）</li>
+</ul>
+<p>但是在 JVM 的即时编译器中存在指令重排序的优化。也就是说上面的第二步和第三步的顺序是不能保证的，最终的执行顺序可能是 1-2-3 也可能是 1-3-2。如果是后者，则在 3 执行完毕、2 未执行之前，被线程二抢占了，这时 instance 已经是非 null 了（但却没有初始化），所以线程二会直接返回 instance，然后使用，然后顺理成章地报错。</p>
+<p>我们只需要将 <strong>instance</strong>变量声明成 <strong>volatile</strong> 就可以了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class Singleton &#123;</div><div class="line">    private volatile static Singleton INSTANCE; //声明成 volatile</div><div class="line">    private Singleton ()&#123;&#125;</div><div class="line"></div><div class="line">    public static Singleton getSingleton() &#123;</div><div class="line">        if (INSTANCE == null) &#123;                         </div><div class="line">            synchronized (Singleton.class) &#123;</div><div class="line">                if (INSTANCE == null) &#123;       </div><div class="line">                    INSTANCE = new Singleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return INSTANCE;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用 volatile 的主要原因是其另一个特性：禁止指令重排序优化。也就是说，在 volatile 变量的赋值操作后面会有一个内存屏障（生成的汇编代码上），读操作不会被重排序到内存屏障之前。比如上面的例子，取操作必须在执行完 1-2-3 之后或者 1-3-2 之后，不存在执行到 1-3 然后取到值的情况。从「先行发生原则」的角度理解的话，就是对于一个 <strong>volatile</strong>变量的写操作都先行发生于后面对这个变量的读操作（这里的“后面”是时间上的先后顺序）。</p>
+<p>但是特别注意在 Java 5 以前的版本使用了 <strong>volatile</strong> 的双检锁还是有问题的。其原因是 Java 5 以前的 JMM （Java 内存模型）是存在缺陷的，即时将变量声明成 volatile 也不能完全避免重排序，主要是 <strong>volatile</strong> 变量前后的代码仍然存在重排序问题。这个 <strong>volatile</strong>屏蔽重排序的问题在 Java 5 中才得以修复，所以在这之后才可以放心使用 <strong>volatile</strong>。<br>至此，这样的懒汉式才是没有问题的懒汉式。</p>
+<h3 id="内部类实现单例"><a href="#内部类实现单例" class="headerlink" title="内部类实现单例"></a>内部类实现单例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class Singleton &#123; </div><div class="line">    /** </div><div class="line">     * 类级的内部类，也就是静态的成员式内部类，该内部类的实例与外部类的实例没有绑定关系， </div><div class="line">     * 而且只有被调用到才会装载，从而实现了延迟加载 </div><div class="line">     */ </div><div class="line">    private static class SingletonHolder&#123; </div><div class="line">        /** </div><div class="line">         * 静态初始化器，由JVM来保证线程安全 </div><div class="line">         */ </div><div class="line">        private static final Singleton instance = new Singleton(); </div><div class="line">    &#125; </div><div class="line">    /** </div><div class="line">     * 私有化构造方法 </div><div class="line">     */ </div><div class="line">    private Singleton()&#123; </div><div class="line">    &#125; </div><div class="line"></div><div class="line">    public static  Singleton getInstance()&#123; </div><div class="line">        return SingletonHolder.instance; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用内部类来维护单例的实例，当<strong>Singleton</strong>被加载时，其内部类并不会被初始化，故可以确保当 <strong>Singleton</strong>类被载入JVM时，不会初始化单例类。只有 <strong>getInstance()</strong> 方法调用时，才会初始化 <strong>instance</strong>。同时，由于实例的建立是时在类加载时完成，故天生对多线程友好，<strong>getInstance()</strong> 方法也无需使用同步关键字。</p>
+<h3 id="年度最佳实践单例—枚举"><a href="#年度最佳实践单例—枚举" class="headerlink" title="年度最佳实践单例—枚举"></a>年度最佳实践单例—<strong>枚举</strong></h3><hr>
+<p>这货长这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public enum Singleton&#123;</div><div class="line">    INSTANCE;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这种方式的好处是：</p>
+<p>1、利用的枚举的特性实现单例<br>2、由JVM保证线程安全<br>3、序列化和反射攻击已经被枚举解决</p>
+<p>调用方式为<code>Singleton.INSTANCE</code>, 出自《Effective Java》第二版第三条: 用私有构造器或枚举类型强化Singleton属性。</p>
+<p><a href="http://www.jianshu.com/p/e84529b464d3" target="_blank" rel="external">原文章</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;单例能做那些事:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;延迟加载&lt;/li&gt;
+&lt;li&gt;线程安全&lt;/li&gt;
+&lt;li&gt;没有性能问题&lt;/li&gt;
+&lt;li&gt;防止序列化产生新对象&lt;/li&gt;
+&lt;li&gt;防止反射攻击&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;最简单的单例—饿汉式&quot;&gt;&lt;a href=&quot;#最简单
+    
+    </summary>
+    
+      <category term="coding" scheme="http://snellfu.com/categories/coding/"/>
+    
+    
+      <category term="Java" scheme="http://snellfu.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搭建Blog的初衷</title>
+    <link href="http://snellfu.com/2016/08/29/aaaa/"/>
+    <id>http://snellfu.com/2016/08/29/aaaa/</id>
+    <published>2016-08-29T14:38:25.000Z</published>
+    <updated>2016-09-02T04:08:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>   拖延症晚期的我，今天起有了自己的Blog！说到为什么要搭自己的博客，这可要好好说道说道。<a id="more"></a><br> 其实很久之前，大概15年还没毕业的时候就有搭建自己blog的想法，一来可以总结一些知识点，二来可以当做自己的一张”名片”，再不济可以拿来跟小伙伴显摆显摆（哈哈~~原谅我的肤浅）。</p>
+<p> 有了这么好的想法，只可惜自己比较懒还伴有拖延症，直到最近，我遇到了一些问题。众所周知作为程序员平时都会总结一些知识点，我也会总结一些，一般会放在印象笔记，有道云笔记上，大概像这样：<br><img src="http://ocpue1vvp.bkt.clouddn.com/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0.png" alt=""></p>
+<p>还有这样：<br><img src="http://ocpue1vvp.bkt.clouddn.com/%E6%9C%89%E9%81%93%E4%BA%91%E7%AC%94%E8%AE%B0.png" alt=""></p>
+<p>有什么感觉？对，一个字-乱。当然也是因为自己没有做好分类，毕竟自己是个随性的人 ，所以当找一个自己总结的知识点时，太费劲了。</p>
+<p>这就是我终于动手搭blog的一个重要原因。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;   拖延症晚期的我，今天起有了自己的Blog！说到为什么要搭自己的博客，这可要好好说道说道。
+    
+    </summary>
+    
+      <category term="other" scheme="http://snellfu.com/categories/other/"/>
+    
+    
+      <category term="其他" scheme="http://snellfu.com/tags/%E5%85%B6%E4%BB%96/"/>
+    
+  </entry>
+  
+</feed>
