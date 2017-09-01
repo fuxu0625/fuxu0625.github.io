@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://snellfu.com/"/>
-  <updated>2017-09-01T03:16:17.000Z</updated>
+  <updated>2017-09-01T08:48:38.000Z</updated>
   <id>http://snellfu.com/</id>
   
   <author>
@@ -20,16 +20,14 @@
     <link href="http://snellfu.com/2017/05/17/api/"/>
     <id>http://snellfu.com/2017/05/17/api/</id>
     <published>2017-05-17T02:52:19.000Z</published>
-    <updated>2017-09-01T03:16:17.000Z</updated>
+    <updated>2017-09-01T08:48:38.000Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a>
-<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的差不多再以word接口文档的方式交付给前端，存在问题：</p>
+    <content type="html"><![CDATA[<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的差不多再以word接口文档的方式交付给前端，存在问题：</p>
 <blockquote>
 <ul>
 <li>接口改动时，不易被识别</li>
-<li>维护困难，不便于查找</li>
 <li>不能进行测试</li>
-<li>单独维护接口文档</li>
+<li>需要单独维护接口文档</li>
 <li>文档更新不及时，更新不方便</li>
 <li>前端需要依赖接口数据进行开发</li>
 <li>代码和文档分离，不好维护</li>
@@ -69,8 +67,7 @@
     
     <summary type="html">
     
-      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;现状&quot;&gt;&lt;a href=&quot;#现状&quot; class=&quot;headerlink&quot; title=&quot;现状&quot;&gt;&lt;/a&gt;现状&lt;/h2&gt;&lt;p&gt;  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的
+      &lt;h2 id=&quot;现状&quot;&gt;&lt;a href=&quot;#现状&quot; class=&quot;headerlink&quot; title=&quot;现状&quot;&gt;&lt;/a&gt;现状&lt;/h2&gt;&lt;p&gt;  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的差不多再以word接口文档的方式交付
     
     </summary>
     
