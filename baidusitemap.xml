@@ -3,6 +3,28 @@
 
 
     
+    
+  <url>
+    <loc>http://snellfu.com/2017/05/17/api/</loc>
+    <lastmod>2017-09-01T03:16:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>Api文档自动生成的调研</title>
+        <pubTime>2017-05-17T02:52:19.000Z</pubTime>
+        
+        <tag>工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="util" url="http://snellfu.com/categories/util/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
   <url>
     <loc>http://snellfu.com/2017/05/12/equalsTest/</loc>
     <lastmod>2017-05-17T02:58:42.000Z</lastmod>
@@ -17,26 +39,6 @@
            
              
               <breadCrumb title="base" url="http://snellfu.com/categories/base/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://snellfu.com/2017/05/17/api/</loc>
-    <lastmod>2017-05-17T02:55:15.000Z</lastmod>
-    <data>
-        <display>
-        <title>Api文档自动生成的调研</title>
-        <pubTime>2017-05-17T02:52:19.000Z</pubTime>
-        
-        <tag>工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="util" url="http://snellfu.com/categories/util/"/>
           
         </display>
     </data>
