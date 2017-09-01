@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[Api文档自动生成的调研]]></title>
       <url>http://snellfu.com/2017/05/17/api/</url>
-      <content type="html"><![CDATA[<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的差不多再以word接口文档的方式交付给前端，存在问题：</p>
+      <content type="html"><![CDATA[<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>  目前团队采用前后端分离的开发模式，需要后端人员提供接口文档，目前的现状后端人员先把接口的逻辑代码写的差不多再以word接口文档的方式交付给前端，存在许多问题：</p>
 <blockquote>
 <ul>
 <li>接口改动时，不易被识别</li>
